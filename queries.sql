@@ -32,8 +32,8 @@ INNER JOIN Products p
 ON c.category_id = p.category_id
 GROUP BY c.category_name;
 
--- 5. Tính tổng số lượng sản phẩm đã đặt bởi mỗi khách hàng (customer_name, total_products)
-SELECT Customers.customer_name, COUNT(Orders.order_id) as total_products
+-- 5. Tính tổng số lượng sản phẩm đã đặt bởi mỗi khách hàng (customer_name, total_ordered)
+SELECT Customers.customer_name, COUNT(Orders.order_id) as total_ordered
 FROM Customers
 INNER JOIN Orders
 ON Customers.customer_id = Orders.customer_id
@@ -41,7 +41,7 @@ INNER JOIN OrderDetails
 ON OrderDetails.order_id = Orders.order_id
 INNER JOIN Products
 ON Products.product_id = OrderDetails.product_id
-GROUP BY Customers.customer_name;
+GROUP BY Customers.customer_id;
 
 -- 6. Lấy thông tin danh mục có nhiều sản phẩm nhất (category_name, product_count)
 SELECT c.category_name, COUNT(p.product_id) as product_count
